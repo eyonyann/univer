@@ -1,0 +1,6 @@
+﻿  functions.cpp
+G:\Другие компьютеры\Компьютер\oaip\lab11_2\functions.cpp(173,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  main.cpp
+G:\Другие компьютеры\Компьютер\oaip\lab11_2\main.cpp(8,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода...
+  lab11_2.vcxproj -> G:\Другие компьютеры\Компьютер\oaip\lab11_2\x64\Debug\lab11_2.exe

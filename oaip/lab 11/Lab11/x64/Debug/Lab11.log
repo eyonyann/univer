@@ -1,0 +1,4 @@
+﻿  functions.cpp
+G:\Другие компьютеры\Компьютер\oaip\lab 11\Lab11\functions.cpp(185,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+G:\Другие компьютеры\Компьютер\oaip\lab 11\Lab11\functions.cpp(370): warning C4715: find: значение возвращается не при всех путях выполнения
+  Lab11.vcxproj -> G:\Другие компьютеры\Компьютер\oaip\lab 11\Lab11\x64\Debug\Lab11.exe

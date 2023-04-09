@@ -1,0 +1,4 @@
+﻿  main.cpp
+E:\My files\oaip\ConsoleApplication1\main.cpp(44,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\My files\oaip\ConsoleApplication1\main.cpp(121,18): warning C4154: deletion of an array expression; conversion to pointer supplied
+  ConsoleApplication1.vcxproj -> E:\My files\oaip\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
