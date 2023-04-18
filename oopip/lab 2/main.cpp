@@ -7,6 +7,7 @@
 using namespace std;
 
 string isDigit(string text);
+int checkInt(int a);
 
 class Log {
 	int amount;
@@ -77,7 +78,7 @@ public:
 			newPw = "";
 
 			cout << "Введите id:";
-			isDigit(newId);
+			cin >>newId;
 			cout << "Введите пароль: ";
 			cin >> newPw;
 
@@ -252,6 +253,7 @@ int main() {
 			cin >> logNum;
 			cout << endl << "В этом журнале " << log[logNum - 1].GetAmount() << " записей " << endl;
 			cout << log[logNum - 1];
+			//log[logNum - 1].GetData();
 
 			break;
 		case '3':
@@ -290,4 +292,23 @@ string isDigit(string text) {
 		result = false;
 
 	}
+}
+
+int checkInt(int a) {
+	while (true) {
+		cin >> a;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "The input can include only numbers. Try again." << endl;
+			continue;
+		}
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		if (cin.gcount() > 1) {
+			cout << "The input can include only numbers. Try again." << endl;
+			continue;
+		}
+		break;
+	}
+	return a;
 }
