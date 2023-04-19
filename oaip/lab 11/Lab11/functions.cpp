@@ -2,7 +2,7 @@
 
 struct aeroflot
 {
-	char destination_name[20];
+	string destination_name[20];
 	char flight_type[20];
 	int flight_num;
 };
