@@ -78,7 +78,7 @@ public:
 			newPw = "";
 
 			cout << "¬ведите id:";
-			cin >>newId;
+			cin >> newId;
 			cout << "¬ведите пароль: ";
 			cin >> newPw;
 
