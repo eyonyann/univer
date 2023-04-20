@@ -1,2 +1,5 @@
-﻿  functions.cpp
-  lab12_2.vcxproj -> E:\My files\univer\labs\x64\Debug\lab12_2.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (lab12_2.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  functions.cpp
+  main.cpp
+  Создание кода...
+  lab12_2.vcxproj -> E:\my files\univer\oaip\lab12\x64\Debug\list_lab12_1(2).exe
