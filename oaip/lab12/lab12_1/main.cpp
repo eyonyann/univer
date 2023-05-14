@@ -20,6 +20,8 @@ int findMin(ListNodePtr& s);
 void deleteRepeats(ListNodePtr& s);
 int deleteRepeatsOfElement(ListNodePtr& s, int value);
 
+int countZero(ListNodePtr& s);
+
 int checkInt(int a);
 
 int main() {
@@ -29,7 +31,7 @@ int main() {
 	instructions();
 	cout << "? ";
 	choice = checkInt(choice);
-	while (choice != 8) {
+	while (choice != 9) {
 		switch (choice) {
 		case 1:
 			cout << "Enter a character: ";
@@ -99,6 +101,15 @@ int main() {
 				cout << "List is empty.\n";
 			break;
 
+		case 8:
+			if (!isEmpty(start)) {
+				cout << "\nIn list there are  " << countZero(start) << " \n";
+				printList(start);
+			}
+			else
+				cout << "List is empty.\n";
+			break;
+
 		default:
 			cout << "Invalid choice.\n";
 			instructions();
@@ -120,7 +131,8 @@ void instructions() {
 		<< "5. Find min.\n"
 		<< "6. Delete all repeats.\n"
 		<< "7. Delete all repeats of element.\n"
-		<< "8. End program.\n";
+		<< "8. Zero elements.\n"
+		<< "9. End program.\n";
 }
 
 void insert(ListNodePtr& s, int value) {
@@ -292,4 +304,21 @@ int checkInt(int a) {
 		break;
 	}
 	return a;
+}
+
+int countZero(ListNodePtr& s) {
+
+	ListNodePtr previous = nullptr, current = s;
+	int count = 0;
+	int element = 0; 
+
+
+	while (current != nullptr) {
+
+		element = current->book;
+		if (element == 0) count++;
+		previous = current;
+		current = current->next;
+	}
+	return count;
 }
