@@ -1,0 +1,3 @@
+﻿  main.cpp
+E:\My files\univer\oaip\lab15_hash\main.cpp(98,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  lab15_hash.vcxproj -> E:\My files\univer\oaip\lab15_hash\x64\Debug\lab15_hash.exe
