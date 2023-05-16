@@ -1,0 +1,8 @@
+﻿  functions.cpp
+  main.cpp
+E:\My files\univer\oopip\lab 4\main.cpp(76,36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\My files\univer\oopip\lab 4\main.cpp(96,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\My files\univer\oopip\lab 4\main.cpp(115,36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\My files\univer\oopip\lab 4\main.cpp(117,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  lab 4.vcxproj -> E:\My files\univer\oopip\x64\Debug\lab 4.exe
