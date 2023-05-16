@@ -1,0 +1,15 @@
+Name: вуапы
+Position: профессор
+Academic Degree: доктор
+Specialization: наук
+Scientific Works:
+- Научная
+- работа
+------------------------------
+Name: 2
+Position: студент
+Academic Degree: доктор
+Specialization: химия
+Scientific Works:
+- химия
+------------------------------
