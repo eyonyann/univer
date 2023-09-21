@@ -1,7 +1,7 @@
 #include "libs.h"
 #include "classes.h"
 
-void createCar(vector<Vehicle*>& vehicles)
+/*void createCar(vector<Vehicle*>& vehicles)
 {
     string material, model, manufacturer, engineType, bodyType, color;
     float power;
@@ -23,27 +23,70 @@ void createCar(vector<Vehicle*>& vehicles)
     cin >> power;
 
     vehicles.push_back(new Car(material, model, manufacturer, power, engineType, bodyType, color));
-}
+}*/
 
-void createAirplane(vector<Vehicle*>& vehicles)
+void createMilitaryCar(vector<Vehicle*>& vehicles)
 {
-    string material, model, manufacturer;
-    float wingspan, maxSpeed;
+    string carType, armoredAnswer, manufacturer, model, nameOfMilitaryUnit, countryOfOrigin, 
+        bodyType, bodyMaterial, colorName, engineType;
 
-    cout << "Enter Airplane details:\n";
-    cout << "Material: ";
-    cin >> material;
-    cout << "Model: ";
-    cin >> model;
+    float enginePower;
+    bool isArmored;
+    int brightness;
+
+    Engine engine;
+    Body body;
+    Color color;
+    MilitaryTransport militaryTransport;
+
+    cout << "\nEnter Car details:\n";
+
+    cout << "Military car type: ";
+    cin >> carType;
+    cout << "Is Armored(y/n): ";
+    cin >> armoredAnswer;
+
     cout << "Manufacturer: ";
     cin >> manufacturer;
-    cout << "Wingspan (meters): ";
-    cin >> wingspan;
-    cout << "Max Speed (km/h): ";
-    cin >> maxSpeed;
+    cout << "Model: ";
+    cin >> model;
 
-    vehicles.push_back(new Airplane(material, model, manufacturer, wingspan, maxSpeed));
+    cout << "Name of military unit: ";
+    cin >> nameOfMilitaryUnit;
+    cout << "Country of origin: ";
+    cin >> countryOfOrigin;
+
+    cout << "Body Type: ";
+    cin >> bodyType;
+    cout << "Body material: ";
+    cin >> bodyMaterial;
+
+    cout << "Color: ";
+    cin >> colorName;
+    cout << "Brightness: ";
+    cin >> brightness;
+
+    cout << "Engine Type: ";
+    cin >> engineType;
+    cout << "Engine Power (HP): ";
+    cin >> enginePower;
+
+    engine.setEngineType(engineType);
+    engine.setPower(enginePower);
+
+    color.setColor(colorName);
+    color.setBrightness(brightness);
+
+    body.setBodyType(bodyType);
+    body.setMaterial(bodyMaterial);
+
+    militaryTransport.setCountryOfOrigin(countryOfOrigin);
+    militaryTransport.setNameOfMilitaryUnit(nameOfMilitaryUnit);
+
+    vehicles.push_back(new MilitaryCar(engine, body, color, manufacturer, model, carType, isArmored, militaryTransport);
 }
+
+
 
 void displayVehicles(const vector<Vehicle*>& vehicles)
 {

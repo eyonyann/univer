@@ -7,43 +7,56 @@ int main()
 
     while (true)
     {
-        cout << "\nMenu:\n";
-        cout << "1. Create Car\n";
-        cout << "2. Create Airplane\n";
-        cout << "3. Display All Vehicles\n";
-        cout << "4. Modify Vehicle Parameters\n";
-        cout << "5. Search for Vehicle (Bubble Sort)\n";
-        cout << "6. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "\nMenu:" << endl;
+        cout << "1. Create a Vehicle (Public, Personal, Military)" << endl;
+        cout << "2. Show All Vehicles" << endl;
+        cout << "3. Update Vehicle Information" << endl;
+        cout << "4. Find a Vehicle" << endl;
+        cout << "5. Exit\n" << endl;
 
         int choice;
         cin >> choice;
 
         switch (choice)
         {
-        case 1:
-            createCar(vehicles);
+        case 1: {
+            cout << "\nChoose the type of vehicle:" << endl;
+            cout << "1. Public Transport" << endl;
+            cout << "2. Personal Transport" << endl;
+            cout << "3. Military Transport\n" << endl;
+
+            int vehicleType;
+            cin >> vehicleType;
+
+            if (vehicleType == 1) {
+
+            }
+            else if (vehicleType == 2) {
+
+            }
+            else if (vehicleType == 3) {
+                createMilitaryCar(vehicles);
+            }
+            else {
+                cout << "Invalid choice." << endl;
+            }
             break;
+        }
 
         case 2:
-            createAirplane(vehicles);
-            break;
-
-        case 3:
             displayVehicles(vehicles);
             break;
 
-        case 4:
+        case 3:
             modifyParameters(vehicles);
             break;
 
-        case 5:
+        case 4:
             searchVehicle(vehicles);
             break;
 
         case 6:
-            for (int i = 0; i < vehicles.size(); i++)
-            {
+            for (int i = 0; i < vehicles.size(); i++){
                 vehicles[i]->writeToFile(FILENAME);
                 delete vehicles[i];
             }
