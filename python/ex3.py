@@ -9,7 +9,7 @@ def is_any_odd_elements(numbers):
 
 
 def get_max_odd_element(numbers):
-    max_odd = None  # Initialize to None
+    max_odd = None
     for number in numbers:
         if number % 2 != 0:
             if max_odd is None or number > max_odd:

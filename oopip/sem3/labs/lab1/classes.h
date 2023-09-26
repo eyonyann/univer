@@ -71,8 +71,8 @@ public:
     Color getColor() const;
     void setColor(const Color& color);
 
-    virtual void writeToFile(string filename);
-    virtual void printInformation();
+    virtual void writeToFile(string filename) = 0;
+    virtual void printInformation() = 0;
 };
 
 class PublicTransport

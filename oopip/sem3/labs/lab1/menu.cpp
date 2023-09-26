@@ -86,6 +86,66 @@ void createMilitaryCar(vector<Vehicle*>& vehicles)
     vehicles.push_back(new MilitaryCar(engine, body, color, manufacturer, model, carType, isArmored, militaryTransport);
 }
 
+void createPersonalCar(vector<Vehicle*>& vehicles)
+{
+    string ownerName, insuranceAnswer, manufacturer, model, yearOfManufacture, registrationNumber,
+        bodyType, bodyMaterial, colorName, engineType;
+
+    float enginePower;
+    bool hasInsurance;
+    int brightness;
+
+    Engine engine;
+    Body body;
+    Color color;
+    PersonalTransport personalTransport;
+
+    cout << "\nEnter Car details:\n";
+
+    cout << "Owner name: ";
+    cin >> ownerName;
+    cout << "Has insurance(y/n): ";
+    cin >> insuranceAnswer;
+
+    cout << "Manufacturer: ";
+    cin >> manufacturer;
+    cout << "Model: ";
+    cin >> model;
+
+    cout << "Year of manufacture: ";
+    cin >> yearOfManufacture;
+    cout << "Registration number: ";
+    cin >> registrationNumber;
+
+    cout << "Body Type: ";
+    cin >> bodyType;
+    cout << "Body material: ";
+    cin >> bodyMaterial;
+
+    cout << "Color: ";
+    cin >> colorName;
+    cout << "Brightness: ";
+    cin >> brightness;
+
+    cout << "Engine Type: ";
+    cin >> engineType;
+    cout << "Engine Power (HP): ";
+    cin >> enginePower;
+
+    engine.setEngineType(engineType);
+    engine.setPower(enginePower);
+
+    color.setColor(colorName);
+    color.setBrightness(brightness);
+
+    body.setBodyType(bodyType);
+    body.setMaterial(bodyMaterial);
+
+    militaryTransport.setCountryOfOrigin(countryOfOrigin);
+    militaryTransport.setNameOfMilitaryUnit(nameOfMilitaryUnit);
+
+    vehicles.push_back(new MilitaryCar(engine, body, color, manufacturer, model, carType, isArmored, militaryTransport);
+}
 
 
 void displayVehicles(const vector<Vehicle*>& vehicles)
