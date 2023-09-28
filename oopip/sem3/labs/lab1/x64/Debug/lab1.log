@@ -1,8 +1,4 @@
-﻿  classes.cpp
-  menu.cpp
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(25,31): error C2661: Car::Car: нет перегруженной функции, принимающей 7 аргументов
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(25,31): message : при попытке сопоставить список аргументов "(std::string, std::string, std::string, float, std::string, std::string, std::string)"
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(45,28): error C2061: синтаксическая ошибка: идентификатор "Airplane"
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(83,26): error C2039: "getMaterial": не является членом "Vehicle".
-D:\My files\univer\oopip\sem3\labs\lab1\classes.h(56,7): message : см. объявление "Vehicle"
-  Создание кода...
+﻿  menu.cpp
+D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(298,33): warning C4101: e: неиспользованная локальная переменная
+D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(317,33): warning C4101: e: неиспользованная локальная переменная
+  lab1.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\lab1.exe

@@ -8,7 +8,7 @@ Engine::Engine(float power, string engineType) : power(power), engineType(engine
 
 Engine::Engine(const Engine& other) : power(other.power), engineType(other.engineType) {}
 
-float Engine::getPower() const {
+float Engine::getPower()  {
     return power;
 }
 
@@ -16,7 +16,7 @@ void Engine::setPower(float power) {
         this->power = power;
 }
 
-string Engine::getEngineType() const {
+string Engine::getEngineType()  {
     return engineType;
 }
 
@@ -31,7 +31,7 @@ Body::Body(string bodyType, string material) : bodyType(bodyType), material(mate
 
 Body::Body(const Body& other) : bodyType(other.bodyType), material(other.material) {}
 
-string Body::getBodyType() const {
+string Body::getBodyType() {
     return bodyType;
 }
 
@@ -39,7 +39,7 @@ void Body::setBodyType(string bodyType) {
     this->bodyType = bodyType;
 }
 
-string Body::getMaterial() const {
+string Body::getMaterial() {
     return material;
 }
 
@@ -54,7 +54,7 @@ Color::Color(string color, int brightness) : color(color), brightness(brightness
 
 Color::Color(const Color& other) : color(other.color), brightness(other.brightness) {}
 
-string Color::getColor() const {
+string Color::getColor() {
     return color;
 }
 
@@ -62,7 +62,7 @@ void Color::setColor(string color) {
     this->color = color;
 }
 
-int Color::getBrightness() const {
+int Color::getBrightness() {
     return brightness;
 }
 
@@ -73,8 +73,8 @@ void Color::setBrightness(int brightness) {
 //Vehicle
 Vehicle::Vehicle() {}
 
-Vehicle::Vehicle(const Engine& engine, const Body& body, const Color& color)
-    : engine(engine), body(body), color(color) {}
+Vehicle::Vehicle(const Engine& engine, const Body& body, const Color& color, const string& vehicleName)
+    : engine(engine), body(body), color(color), vehicleName(vehicleName) {}
 
 Engine Vehicle::getEngine() const {
     return engine;
@@ -100,55 +100,14 @@ void Vehicle::setColor(const Color& color) {
     this->color = color;
 }
 
-//PublicTransport
-PublicTransport::PublicTransport() : cityName(""), passengerCapacity(0) {}
-
-PublicTransport::PublicTransport(string cityName, int passengerCapacity)
-    : cityName(cityName), passengerCapacity(passengerCapacity) {}
-
-PublicTransport::PublicTransport(const PublicTransport& other)
-    : cityName(other.cityName), passengerCapacity(other.passengerCapacity) {}
-
-string PublicTransport::getCityName() const {
-    return cityName;
+string Vehicle::getVehicleName() const{
+    return this->vehicleName;
 }
 
-void PublicTransport::setCityName(string cityName) {
-    this->cityName = cityName;
+void Vehicle::setVehicleName(const string& name) {
+    this->vehicleName = name;
 }
 
-int PublicTransport::getPassengerCapacity() const {
-        return passengerCapacity;
-}
-
-void PublicTransport::setPassengerCapacity(int passengerCapacity) {
-        this->passengerCapacity = passengerCapacity;
-}
-
-//PersonalTransport
-PersonalTransport::PersonalTransport() : ownerName(""), hasInsurance(false) {}
-
-PersonalTransport::PersonalTransport(string ownerName, bool hasInsurance)
-    : ownerName(ownerName), hasInsurance(hasInsurance) {}
-
-PersonalTransport::PersonalTransport(const PersonalTransport& other)
-    : ownerName(other.ownerName), hasInsurance(other.hasInsurance) {}
-
-string PersonalTransport::getOwnerName() const {
-    return ownerName;
-}
-
-void PersonalTransport::setOwnerName(string ownerName) {
-    this->ownerName = ownerName;
-}
-
-bool PersonalTransport::getHasInsurance() const {
-    return hasInsurance;
-}
-
-void PersonalTransport::setHasInsurance(bool hasInsurance) {
-    this->hasInsurance = hasInsurance;
-}
 
 //MilitaryTransport
 MilitaryTransport::MilitaryTransport() : nameOfMilitaryUnit(""), countryOfOrigin("") {}
@@ -179,10 +138,10 @@ void MilitaryTransport::setCountryOfOrigin(string countryOfOrigin) {
 Car::Car() : manufacturer(""), model("") {}
 
 Car::Car(const Engine& engine, const Body& body, const Color& color, string manufacturer, string model)
-    : Vehicle(engine, body, color), manufacturer(manufacturer), model(model) {}
+    : Vehicle(engine, body, color, ""), manufacturer(manufacturer), model(model) {}
 
 Car::Car(const Car& other)
-    : Vehicle(other.getEngine(), other.getBody(), other.getColor()),
+    : Vehicle(other.getEngine(), other.getBody(), other.getColor(), ""), 
     manufacturer(other.manufacturer), model(other.model) {}
 
 string Car::getManufacturer() const {
@@ -202,23 +161,22 @@ void Car::setModel(string model) {
 }
 
 //MilitaryCar
-MilitaryCar::MilitaryCar() : militaryCarType(""), isArmored(false) {}
+MilitaryCar::MilitaryCar() : Car(), militaryCarType(""), isArmored(false) {}
 
-MilitaryCar::MilitaryCar(const Engine& engine, const Body& body, const Color& color,
-    string manufacturer, string model,
-    string militaryCarType, bool isArmored,
-    const MilitaryTransport& militaryTransport)
-    : Car(engine, body, color, manufacturer, model),
-    militaryCarType(militaryCarType), isArmored(isArmored),
-    MilitaryTransport(militaryTransport) {}
+MilitaryCar::MilitaryCar(const string& vehicleName, const Engine& engine, const Body& body, const Color& color,
+    string manufacturer, string model, string militaryCarType, bool isArmored, 
+    string countryOfOrigin, string nameOfMilitaryUnit)
+    : Vehicle(engine, body, color, vehicleName), Car(engine, body, color, manufacturer, model),
+    MilitaryTransport(nameOfMilitaryUnit, countryOfOrigin),
+    militaryCarType(militaryCarType), isArmored(isArmored) {}
 
 MilitaryCar::MilitaryCar(const MilitaryCar& other)
-    : Car(other.getEngine(), other.getBody(), other.getColor(),
-        other.getManufacturer(), other.getModel()),
-    militaryCarType(other.militaryCarType), isArmored(other.isArmored),
-    MilitaryTransport(other) {}
+    : Vehicle(other.getEngine(), other.getBody(), other.getColor(), other.getVehicleName() + " copied"),
+    Car(other.getEngine(), other.getBody(), other.getColor(), other.getManufacturer(), other.getModel()), 
+    MilitaryTransport(other.getNameOfMilitaryUnit(), other.getCountryOfOrigin()),
+    militaryCarType(other.militaryCarType), isArmored(other.isArmored) {}
 
-string MilitaryCar::getMilitaryCarType() const {
+string MilitaryCar::getMilitaryCarType() const{
     return militaryCarType;
 }
 
@@ -238,6 +196,8 @@ void MilitaryCar::writeToFile(string filename) {
     ofstream outFile(filename);
     if (outFile.is_open())
     {
+        outFile << "Vehicle name: " << this->getVehicleName() << endl;
+
         outFile << "Military car type: " << this->getMilitaryCarType() << endl;
         outFile << "Is Armored: " << (this->getIsArmored() ? "Yes" : "No") << endl;
 
@@ -265,7 +225,9 @@ void MilitaryCar::writeToFile(string filename) {
 }
 
 void MilitaryCar::printInformation() {
-        cout << "\nMilitary car type: " << this->getMilitaryCarType() << endl;
+        cout << "\nVehicle name: " << this->getVehicleName() << endl;
+        
+        cout << "Military car type: " << this->getMilitaryCarType() << endl;
         cout << "Is Armored: " << (this->getIsArmored() ? "Yes" : "No") << endl;
 
         cout << "Manufacturer: " << this->getManufacturer() << endl;
@@ -282,170 +244,4 @@ void MilitaryCar::printInformation() {
 
         cout << "Engine type: " << this->getEngine().getEngineType() << endl;
         cout << "Engine power: " << this->getEngine().getPower() << endl << endl;
-}
-
-//PublicCar
-PublicCar::PublicCar() : routeNumber(0), operatorName("") {}
-
-PublicCar::PublicCar(const Engine& engine, const Body& body, const Color& color,
-    string manufacturer, string model,
-    int routeNumber, string operatorName,
-    const PublicTransport& publicTransport)
-    : Car(engine, body, color, manufacturer, model),
-    routeNumber(routeNumber), operatorName(operatorName),
-    PublicTransport(publicTransport) {}
-
-PublicCar::PublicCar(const PublicCar& other)
-    : Car(other.getEngine(), other.getBody(), other.getColor(),
-        other.getManufacturer(), other.getModel()),
-    routeNumber(other.routeNumber), operatorName(other.operatorName),
-    PublicTransport(other) {}
-
-int PublicCar::getRouteNumber() const {
-        return routeNumber;
-}
-
-void PublicCar::setRouteNumber(int routeNumber) {
-        this->routeNumber = routeNumber;
-}
-
-string PublicCar::getOperatorName() const {
-    return operatorName;
-}
-
-void PublicCar::setOperatorName(std::string operatorName) {
-    this->operatorName = operatorName;
-}
-
-void PublicCar::writeToFile(string filename) {
-    ofstream outFile(filename);
-    if (outFile.is_open())
-    {
-        outFile << "City name: " << this->getCityName() << endl;
-        outFile << "Passenger capacity: " << this->getPassengerCapacity() << endl;
-
-        outFile << "Manufacturer: " << this->getManufacturer() << endl;
-        outFile << "Model: " << this->getModel() << endl;
-
-        outFile << "Route number: " << this->getRouteNumber() << endl;
-        outFile << "Operator name: " << this->getOperatorName() << endl;
-
-        outFile << "Body Type: " << this->getBody().getBodyType() << endl;
-        outFile << "Body material: " << this->getBody().getMaterial() << endl;
-
-        outFile << "Color: " << this->getColor().getColor() << endl;
-        outFile << "Brightness: " << this->getColor().getBrightness() << endl;
-
-        outFile << "Engine type: " << this->getEngine().getEngineType() << endl;
-        outFile << "Engine power: " << this->getEngine().getPower() << endl;
-        outFile.close();
-        cout << "Data written to file: " << filename << endl;
-    }
-    else
-    {
-        cout << "Error: Unable to open file." << endl;
-    }
-}
-
-void PublicCar::printInformation() {
-    cout << "\nCity name: " << this->getCityName() << endl;
-    cout << "Passenger capacity: " << this->getPassengerCapacity() << endl;
-
-    cout << "Manufacturer: " << this->getManufacturer() << endl;
-    cout << "Model: " << this->getModel() << endl;
-
-    cout << "Route number: " << this->getRouteNumber() << endl;
-    cout << "Operator name: " << this->getOperatorName() << endl;
-
-    cout << "Body Type: " << this->getBody().getBodyType() << endl;
-    cout << "Body material: " << this->getBody().getMaterial() << endl;
-
-    cout << "Color: " << this->getColor().getColor() << endl;
-    cout << "Brightness: " << this->getColor().getBrightness() << endl;
-
-    cout << "Engine type: " << this->getEngine().getEngineType() << endl;
-    cout << "Engine power: " << this->getEngine().getPower() << endl << endl;
-}
-
-//PersonalCar
-PersonalCar::PersonalCar() : yearOfManufacture(0), registrationNumber("") {}
-
-PersonalCar::PersonalCar(const Engine& engine, const Body& body, const Color& color,
-    string manufacturer, string model,
-    int yearOfManufacture, string registrationNumber,
-    const PersonalTransport& personalTransport)
-    : Car(engine, body, color, manufacturer, model),
-    yearOfManufacture(yearOfManufacture), registrationNumber(registrationNumber),
-    PersonalTransport(personalTransport) {}
-
-PersonalCar::PersonalCar(const PersonalCar& other)
-    : Car(other.getEngine(), other.getBody(), other.getColor(),
-        other.getManufacturer(), other.getModel()),
-    yearOfManufacture(other.yearOfManufacture), registrationNumber(other.registrationNumber),
-    PersonalTransport(other) {}
-
-int PersonalCar::getYearOfManufacture() const {
-    return yearOfManufacture;
-}
-
-void PersonalCar::setYearOfManufacture(int yearOfManufacture) {
-        this->yearOfManufacture = yearOfManufacture;
-}
-
-string PersonalCar::getRegistrationNumber() const {
-    return registrationNumber;
-}
-
-void PersonalCar::setRegistrationNumber(string registrationNumber) {
-    this->registrationNumber = registrationNumber;
-}
-
-void PersonalCar::writeToFile(string filename) {
-    ofstream outFile(filename);
-    if (outFile.is_open())
-    {
-        outFile << "Owner name: " << this->getOwnerName() << endl;
-        outFile << "Has insurance: " << (this->getHasInsurance() ? "Yes" : "No") << endl;
-
-        outFile << "Manufacturer: " << this->getManufacturer() << endl;
-        outFile << "Model: " << this->getModel() << endl;
-
-        outFile << "Year of manufacture: " << this->getYearOfManufacture() << endl;
-        outFile << "Registration number: " << this->getRegistrationNumber() << endl;
-
-        outFile << "Body Type: " << this->getBody().getBodyType() << endl;
-        outFile << "Body material: " << this->getBody().getMaterial() << endl;
-
-        outFile << "Color: " << this->getColor().getColor() << endl;
-        outFile << "Brightness: " << this->getColor().getBrightness() << endl;
-
-        outFile << "Engine type: " << this->getEngine().getEngineType() << endl;
-        outFile << "Engine power: " << this->getEngine().getPower() << endl;
-        outFile.close();
-        cout << "Data written to file: " << filename << endl;
-    }
-    else
-    {
-        cout << "Error: Unable to open file." << endl;
-    }
-}
-
-void PersonalCar::printInformation() {
-    cout << "\nOwner name: " << this->getOwnerName() << endl;
-    cout << "Has insurance: " << (this->getHasInsurance() ? "Yes" : "No") << endl;
-
-    cout << "Manufacturer: " << this->getManufacturer() << endl;
-    cout << "Model: " << this->getModel() << endl;
-
-    cout << "Year of manufacture: " << this->getYearOfManufacture() << endl;
-    cout << "Registration number: " << this->getRegistrationNumber() << endl;
-
-    cout << "Body Type: " << this->getBody().getBodyType() << endl;
-    cout << "Body material: " << this->getBody().getMaterial() << endl;
-
-    cout << "Color: " << this->getColor().getColor() << endl;
-    cout << "Brightness: " << this->getColor().getBrightness() << endl;
-
-    cout << "Engine type: " << this->getEngine().getEngineType() << endl;
-    cout << "Engine power: " << this->getEngine().getPower() << endl << endl;
 }

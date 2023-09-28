@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <fstream>
 #include <vector>
+#include<limits>
 
 #define FILENAME "file.txt"
 
