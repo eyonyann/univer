@@ -1,0 +1,13 @@
+Vehicle name: y
+Military car type: y
+Is Armored: Yes
+Manufacturer: y
+Model: 
+Name of military unit: y
+Country of origin: y
+Body Type: 
+Body material: y
+Color: y
+Brightness: 1
+Engine type: y
+Engine power: 3

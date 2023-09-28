@@ -3,6 +3,9 @@
 
 int main()
 {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
     vector<Vehicle*> vehicles;
 
     while (true)
@@ -35,10 +38,9 @@ int main()
             SearchVehicle(vehicles);
             break;
 
-        case 6:
+        case 5:
             for (int i = 0; i < vehicles.size(); i++){
                 vehicles[i]->writeToFile(FILENAME);
-                delete vehicles[i];
             }
             return 0;
 

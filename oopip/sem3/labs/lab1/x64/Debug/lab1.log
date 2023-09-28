@@ -1,4 +1,2 @@
-﻿  menu.cpp
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(298,33): warning C4101: e: неиспользованная локальная переменная
-D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(317,33): warning C4101: e: неиспользованная локальная переменная
+﻿  main.cpp
   lab1.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\lab1.exe
