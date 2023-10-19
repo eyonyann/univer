@@ -1,2 +1,8 @@
-﻿  main.cpp
-  lab1.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\lab1.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (lab1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  classes.cpp
+  main.cpp
+  menu.cpp
+D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(298,33): warning C4101: e: неиспользованная локальная переменная
+D:\My files\univer\oopip\sem3\labs\lab1\menu.cpp(317,33): warning C4101: e: неиспользованная локальная переменная
+  Создание кода...
+  lab1.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\Vehicles.exe

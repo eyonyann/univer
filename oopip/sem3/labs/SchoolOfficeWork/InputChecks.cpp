@@ -1,4 +1,4 @@
-#include "libs.h"
+﻿#include "libs.h"
 
 bool GetBoolAnswer(string answer)
 {

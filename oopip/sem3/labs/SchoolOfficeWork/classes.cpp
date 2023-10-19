@@ -1,4 +1,4 @@
-#include "classes.h"
+п»ї#include "classes.h"
 #include "libs.h"
 #include "InputChecks.h"
 
@@ -41,55 +41,58 @@ void Employee::runMenu() {
     int choice;
 
     while (true) {
-        cout << "\nМеню:" << endl;
-        cout << "1. Создать документ" << endl;
-        cout << "2. Изменить документ" << endl;
-        cout << "3. Посмотреть документы" << endl;
-        cout << "4. Удалить документ" << endl;
-        cout << "5. Выход" << endl;
-        cout << "Выберите действие: ";
+        cout << "\nMenu:" << endl;
+        cout << "1. Create document" << endl;
+        cout << "2. Edit document" << endl;
+        cout << "3. View documents" << endl;
+        cout << "4. Delete document" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Choose an action: ";
+
         choice = GetIntNumber();
 
         switch (choice) {
         case 1:
         {
             string title, content;
-            cout << "Введите заголовок документа: ";
+            cout << "Enter the document title: ";
             cin.ignore();
             getline(cin, title);
-            cout << "Введите содержание документа: ";
+            cout << "Enter the document content: ";
             getline(cin, content);
 
             SmartPointer<Document<string>> newDocument = documentManager.CreateDocument(title, content);
-            cout << "Документ создан с ID: " << newDocument->getID() << endl;
+            cout << "Document created with ID: " << newDocument->getID() << endl;
+
         }
         break;
         case 2:
         {
             int docID;
-            cout << "Введите ID документа, который нужно изменить: ";
+            cout << "Enter the ID of the document to edit: ";
             docID = GetIntNumber();
             documentManager.EditDocument(docID);
         }
         break;
         case 3:
-            cout << "\nВот ваши документы: \n";
+            cout << "\nHere are your documents: \n";
             documentManager.PrintAllDocuments();
             break;
         case 4:
         {
             int docID;
-            cout << "Введите ID документа, который нужно удалить: ";
+            cout << "Enter the ID of the document to delete: ";
             docID = GetIntNumber();
             documentManager.DeleteDocument(docID);
         }
         break;
         case 5:
-            cout << "Выход из программы." << endl;
+            cout << "Exiting the program." << endl;
             return;
         default:
-            cout << "Неверный выбор. Попробуйте еще раз." << endl;
+            cout << "Invalid choice. Please try again." << endl;
         }
+
     }
 }
 
@@ -201,60 +204,59 @@ void DocumentManagement::EditDocument(int docId) {
 
         string newTitle, newContent;
         std::cin.ignore();
-        std::cout << "Введите новый заголовок документа: ";
+        std::cout << "Enter the new document title: ";
         getline(std::cin, newTitle);
-        std::cout << "Введите новое содержание документа: ";
+        std::cout << "Enter the new document content: ";
         getline(std::cin, newContent);
-
 
         document->setTitle(newTitle);
         document->setContent(newContent);
 
         char confirm;
-        std::cout << "Сохранить изменения (y/n)? ";
+        std::cout << "Save changes (y/n)? ";
         std::cin >> confirm;
 
         if (confirm == 'y' || confirm == 'Y') {
             transaction.commit();
-            std::cout << "Изменения сохранены." << std::endl;
+            std::cout << "Changes saved." << std::endl;
         }
         else {
             transaction.rollback();
-            std::cout << "Изменения откатываются." << std::endl;
+            std::cout << "Changes rolled back." << std::endl;
         }
     }
+
     else {
-        std::cout << "Документ с указанным ID не найден." << std::endl;
+        cout << "Document with the specified ID was not found." << endl;
     }
 }
 
 void DocumentManagement::DeleteDocument(int docId) {
     SmartPointer<Document<string>> document = FindDocumentByID(docId);
 
-
     if (document != nullptr) {
         Transaction transaction(document);
 
         char confirm;
         PrintDocument(FindDocumentByID(docId));
-        cout << "\nВы точно хотите удалить этот документ?\n";
+        cout << "\nAre you sure you want to delete this document?\n";
         cin >> confirm;
 
         if (confirm == 'y' || confirm == 'Y') {
             documents.erase(remove(documents.begin(), documents.end(), document), documents.end());
             transaction.commit();
-            std::cout << "Документ удален." << std::endl;
+            std::cout << "Document deleted." << std::endl;
         }
         else {
             transaction.rollback();
-            std::cout << "Документ не удален." << std::endl;
+            std::cout << "Document not deleted." << std::endl;
         }
-        
     }
     else {
-        std::cout << "\nДокумент с ID " << docId << " не найден.\n" << std::endl;
+        std::cout << "\nDocument with ID " << docId << " not found.\n" << std::endl;
     }
 }
+
 
 void DocumentManagement::PrintDocument(SmartPointer<Document<string>> document)  {
     std::cout << "\nDocument ID: " << document->getID() << std::endl;
@@ -265,7 +267,7 @@ void DocumentManagement::PrintDocument(SmartPointer<Document<string>> document) 
 void DocumentManagement::PrintAllDocuments() {
     if (documents.size() == 0)
     {
-        cout << "\nУ вас пока нет ни одного документа\n";
+        cout << "\nYou don't have any documents yet.\n";
     } 
     else {
         for (int i = 0; i < documents.size(); i++) {

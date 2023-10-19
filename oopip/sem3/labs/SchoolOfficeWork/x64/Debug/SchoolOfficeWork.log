@@ -1,2 +1,6 @@
-﻿  classes.cpp
+﻿  InputChecks.cpp
+D:\My files\univer\oopip\sem3\labs\SchoolOfficeWork\InputChecks.cpp(45,33): warning C4101: e: неиспользованная локальная переменная
+  classes.cpp
+  main.cpp
+  Создание кода...
   SchoolOfficeWork.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\SchoolOfficeWork.exe

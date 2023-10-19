@@ -1,4 +1,4 @@
-#include "libs.h"
+п»ї#include "libs.h"
 
 template <typename T>
 class SmartPointer {
@@ -25,8 +25,8 @@ class Employee {
 public:
     Employee();
     Employee(const string& name, int employeeID);
-    Employee(const Employee& other); // Конструктор копирования
-    ~Employee(); // Деструктор
+    Employee(const Employee& other);
+    ~Employee();
 
     string getName() const;
     void setName(const string& name);
@@ -46,18 +46,18 @@ class Document {
 public:
     Document();
     Document(const string& title, const T& content);
-    Document(const Document& other); // Конструктор копирования
-    ~Document(); // Деструктор
+    Document(const Document& other);
+    ~Document(); 
 
     string getTitle() const;
     void setTitle(const string& title);
     T getContent() const;
     void setContent(const T& content);
-    int getID() const; // Получение ID документа
+    int getID() const; 
 
 private:
-    static int count; // Статическое поле для отслеживания количества созданных документов
-    int id; // Уникальный ID документа
+    static int count;
+    int id;
     string title;
     T content;
 };
@@ -65,7 +65,7 @@ private:
 class Transaction {
 public:
     Transaction(SmartPointer<Document<string>> document);
-    ~Transaction(); // Деструктор
+    ~Transaction();
 
     void commit();
 
@@ -73,15 +73,15 @@ public:
 
 private:
     SmartPointer<Document<string>> document;
-    string previousContent; // Предыдущее состояние документа
+    string previousContent;
     string previousTitle;
-    bool committed; // Флаг, указывающий, были ли изменения зафиксированы
+    bool committed;
 };
 
 class DocumentManagement {
 public:
     DocumentManagement();
-    ~DocumentManagement(); // Деструктор
+    ~DocumentManagement();
 
     SmartPointer<Document<string>> FindDocumentByID(int docId);
     void EditDocument(int docId);
