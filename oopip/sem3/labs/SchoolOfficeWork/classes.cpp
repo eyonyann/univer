@@ -1,6 +1,16 @@
 #include "classes.h"
+#include "libs.h"
+#include "InputChecks.h"
+
 
 //Employee
+int Employee::count = 0;
+
+Employee::Employee() :  name("") {
+    ++count;
+    employeeID = count;
+}
+
 Employee::Employee(const std::string& name, int employeeID) : name(name), employeeID(employeeID) {
 
 }
@@ -25,24 +35,20 @@ int Employee::getEmployeeID() const {
     return employeeID;
 }
 
-void Employee::setEmployeeID(int employeeID) {
-    this->employeeID = employeeID;
-}
-
 void Employee::runMenu() {
     DocumentManagement documentManager;
     
     int choice;
 
     while (true) {
-        cout << "Меню:" << endl;
+        cout << "\nМеню:" << endl;
         cout << "1. Создать документ" << endl;
         cout << "2. Изменить документ" << endl;
         cout << "3. Посмотреть документы" << endl;
         cout << "4. Удалить документ" << endl;
         cout << "5. Выход" << endl;
         cout << "Выберите действие: ";
-        cin >> choice;
+        choice = GetIntNumber();
 
         switch (choice) {
         case 1:
@@ -54,7 +60,7 @@ void Employee::runMenu() {
             cout << "Введите содержание документа: ";
             getline(cin, content);
 
-            Document<string>* newDocument = documentManager.CreateDocument(title, content);
+            SmartPointer<Document<string>> newDocument = documentManager.CreateDocument(title, content);
             cout << "Документ создан с ID: " << newDocument->getID() << endl;
         }
         break;
@@ -62,18 +68,19 @@ void Employee::runMenu() {
         {
             int docID;
             cout << "Введите ID документа, который нужно изменить: ";
-            cin >> docID;
+            docID = GetIntNumber();
             documentManager.EditDocument(docID);
         }
         break;
         case 3:
-            
+            cout << "\nВот ваши документы: \n";
+            documentManager.PrintAllDocuments();
             break;
         case 4:
         {
             int docID;
             cout << "Введите ID документа, который нужно удалить: ";
-            cin >> docID;
+            docID = GetIntNumber();
             documentManager.DeleteDocument(docID);
         }
         break;
@@ -104,8 +111,9 @@ Document<T>::Document(const string& title, const T& content) : title(title), con
 }
 
 template<typename T>
-Document<T>::Document(const Document& other) : title(other.title), content(other.content), id(other.id) {
-    // Дополнительная логика копирования, если необходима
+Document<T>::Document(const Document& other) : title(other.title), content(other.content) {
+    ++count;
+    id = count;
 }
 
 template<typename T>
@@ -139,13 +147,15 @@ int Document<T>::getID() const {
 }
 
 //Transaction
-Transaction::Transaction(Document<string>* document) : document(document), committed(false) {
+Transaction::Transaction(SmartPointer<Document<string>> document) : document(document), committed(false) {
     previousContent = document->getContent();
+    previousTitle = document->getTitle();
 }
 
 Transaction::~Transaction() {
     if (!committed) {
         document->setContent(previousContent);
+        document->setTitle(previousTitle);
     }
 }
 
@@ -156,6 +166,7 @@ void Transaction::commit() {
 void Transaction::rollback() {
     if (!committed) {
         document->setContent(previousContent);
+        document->setTitle(previousTitle);
     }
 }
 
@@ -166,90 +177,122 @@ DocumentManagement::DocumentManagement() {
 DocumentManagement::~DocumentManagement() {
 }
 
-Document<string>* DocumentManagement::CreateDocument(const string& title, const string& content) {
-    Document<string>* document = new Document<string>(title, content);
+SmartPointer<Document<string>> DocumentManagement::CreateDocument(const string& title, const string& content) {
+    SmartPointer<Document<string>> document(new Document<string>(title, content));
     documents.push_back(document);
     return document;
 }
 
-Document<string>* DocumentManagement::FindDocumentByID(const int& docId) {
-    bool found = false;
-    for (int i = 0; i < documents.size(); i++)
-    {
-        if (documents[i]->getID() == docId)
-        {
-            found = true;
-            return documents[i];
+
+SmartPointer<Document<string>> DocumentManagement::FindDocumentByID(int docId) {
+    for (int i = 0; i < documents.size(); i++) {
+        if (documents[i]->getID() == docId) {
+            return SmartPointer<Document<string>>(documents[i]);
         }
     }
+    return SmartPointer<Document<string>>();
 }
 
-void DocumentManagement::EditDocument(const int& docId) {
-    DocumentManagement documentManager;
-    Document<string>* document = documentManager.FindDocumentByID(docId);
+void DocumentManagement::EditDocument(int docId) {
+    SmartPointer<Document<string>> document = FindDocumentByID(docId);
 
-    if (document) {
-        string newTitle, newContent;
-        cout << "Введите новый заголовок документа: ";
-        cin.ignore();
-        getline(cin, newTitle);
-        cout << "Введите новое содержание документа: ";
-        getline(cin, newContent);
-
-        // Создаем транзакцию для изменения документа
+    if (document != nullptr) {
         Transaction transaction(document);
+
+        string newTitle, newContent;
+        std::cin.ignore();
+        std::cout << "Введите новый заголовок документа: ";
+        getline(std::cin, newTitle);
+        std::cout << "Введите новое содержание документа: ";
+        getline(std::cin, newContent);
+
+
         document->setTitle(newTitle);
         document->setContent(newContent);
 
         char confirm;
-        cout << "Сохранить изменения (y/n)? ";
-        cin >> confirm;
+        std::cout << "Сохранить изменения (y/n)? ";
+        std::cin >> confirm;
 
         if (confirm == 'y' || confirm == 'Y') {
             transaction.commit();
-            cout << "Изменения сохранены." << endl;
+            std::cout << "Изменения сохранены." << std::endl;
         }
         else {
             transaction.rollback();
-            cout << "Изменения откатываются." << endl;
+            std::cout << "Изменения откатываются." << std::endl;
         }
     }
     else {
-        cout << "Документ с указанным ID не найден." << endl;
+        std::cout << "Документ с указанным ID не найден." << std::endl;
     }
 }
 
-void DocumentManagement::DeleteDocument(const int& docId) {
+void DocumentManagement::DeleteDocument(int docId) {
+    SmartPointer<Document<string>> document = FindDocumentByID(docId);
 
+
+    if (document != nullptr) {
+        Transaction transaction(document);
+
+        char confirm;
+        PrintDocument(FindDocumentByID(docId));
+        cout << "\nВы точно хотите удалить этот документ?\n";
+        cin >> confirm;
+
+        if (confirm == 'y' || confirm == 'Y') {
+            documents.erase(remove(documents.begin(), documents.end(), document), documents.end());
+            transaction.commit();
+            std::cout << "Документ удален." << std::endl;
+        }
+        else {
+            transaction.rollback();
+            std::cout << "Документ не удален." << std::endl;
+        }
+        
+    }
+    else {
+        std::cout << "\nДокумент с ID " << docId << " не найден.\n" << std::endl;
+    }
 }
 
-//void DocumentManagement::assignEmployeeToDocument(Employee* employee, Document<string>* document) {
-//    // Логика назначения сотрудника к документу
-//}
-//
-//void DocumentManagement::finalizeDocument(Document<string>* document) {
-//    // Логика завершения работы с документом
-//}
-//
-//void DocumentManagement::rollbackDocument(Document<string>* document) {
-//    // Логика отката изменений в документе
-//}
+void DocumentManagement::PrintDocument(SmartPointer<Document<string>> document)  {
+    std::cout << "\nDocument ID: " << document->getID() << std::endl;
+    std::cout << "Title: " << document->getTitle() << std::endl;
+    std::cout << "Content: " << document->getContent() << std::endl << endl;
+}
+
+void DocumentManagement::PrintAllDocuments() {
+    if (documents.size() == 0)
+    {
+        cout << "\nУ вас пока нет ни одного документа\n";
+    } 
+    else {
+        for (int i = 0; i < documents.size(); i++) {
+            PrintDocument(documents[i]);
+        }
+    }
+}
 
 
 //SmartPointer
-SmartPointer::SmartPointer(Document<string>* ptr) : pointer(ptr), refCount(new std::size_t(1)) {}
+template <typename T>
+SmartPointer<T>::SmartPointer(T* ptr) : pointer(ptr), refCount(new std::size_t(1)) {}
 
-SmartPointer::SmartPointer(const SmartPointer& other) : pointer(other.pointer), refCount(other.refCount) {
+template <typename T>
+SmartPointer<T>::SmartPointer(const SmartPointer<T>& other) : pointer(other.pointer), refCount(other.refCount) {
     if (refCount) {
         ++(*refCount);
     }
 }
 
-SmartPointer::~SmartPointer() {
+template <typename T>
+SmartPointer<T>::~SmartPointer() {
     release();
 }
 
-SmartPointer& SmartPointer::operator=(const SmartPointer& other) {
+template <typename T>
+SmartPointer<T>& SmartPointer<T>::operator=(const SmartPointer<T>& other) {
     if (this != &other) {
         release();
         pointer = other.pointer;
@@ -261,15 +304,28 @@ SmartPointer& SmartPointer::operator=(const SmartPointer& other) {
     return *this;
 }
 
-Document<string>* SmartPointer::operator->() const {
+template <typename T>
+T* SmartPointer<T>::operator->() const {
     return pointer;
 }
 
-Document<string>& SmartPointer::operator*() const {
+template <typename T>
+T& SmartPointer<T>::operator*() const {
     return *pointer;
 }
 
-void SmartPointer::release() {
+template <typename T>
+bool SmartPointer<T>::operator==(const SmartPointer<T>& other) const {
+    return this->pointer == other.pointer;
+}
+
+template <typename T>
+bool SmartPointer<T>::operator!=(const SmartPointer<T>& other) const {
+    return this->pointer != other.pointer;
+}
+
+template <typename T>
+void SmartPointer<T>::release() {
     if (refCount && --(*refCount) == 0) {
         delete pointer;
         delete refCount;
