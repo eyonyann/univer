@@ -41,7 +41,7 @@ private:
     
 };
 
-template<typename T>
+template <typename T>
 class Document {
 public:
     Document();
