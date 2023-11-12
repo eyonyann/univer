@@ -50,11 +50,29 @@ Book::Book(const std::string& title, const std::string& author, double price)
 Book::~Book() {}
 
 void Book::DisplayInfo() const {
-    std::cout << std::left << std::setw(5) << bookID << " | "
-        << std::left << std::setw(30) << title << " | "
-        << std::left << std::setw(30) << author << " | "
-        << std::left << std::setw(10) << price << std::endl;
+    std::cout.setf(std::ios::left);
+    std::cout.setf(std::ios::fixed);
+    std::cout.precision(2);
+
+    std::cout << std::setw(5) << bookID << " | "
+        << std::setw(30) << title << " | "
+        << std::setw(30) << author << " | "
+        << std::setw(10) << price << std::endl;
+
+    if (std::cout.eof()) {
+        std::cerr << "Error: End of file reached during output." << std::endl;
+    }
+    else if (std::cout.fail()) {
+        std::cerr << "Error: Output operation failed." << std::endl;
+    }
+    else if (std::cout.bad()) {
+        std::cerr << "Error: Fatal output error." << std::endl;
+    }
+
+    std::cout.unsetf(std::ios::left);
+    std::cout.unsetf(std::ios::fixed);
 }
+
 
 std::string Book::GetTitle() { return title; }
 std::string Book::GetAuthor() { return author; }
@@ -75,6 +93,7 @@ void Category::AddBook(Book* book) {
 
 void Category::DisplayBooks() const {
     std::cout << "Category: " << name << std::endl;
+    std::cout.setf(std::ios::left);
     std::cout << std::left << std::setw(5) << "ID" << " | "
         << std::left << std::setw(30) << "Title" << " | "
         << std::left << std::setw(30) << "Author" << " | "
@@ -82,25 +101,30 @@ void Category::DisplayBooks() const {
     for (const Book* book : books) {
         book->DisplayInfo();
     }
+    std::cout.unsetf(std::ios::left);
+
+    if (std::cout.eof()) {
+        std::cerr << "Error: End of file reached during output." << std::endl;
+    }
+    else if (std::cout.fail()) {
+        std::cerr << "Error: Output operation failed." << std::endl;
+    }
+    else if (std::cout.bad()) {
+        std::cerr << "Error: Fatal output error." << std::endl;
+    }
 }
 
-const std::vector<Book*>& Category::GetBooks() const {
+std::vector<Book*>& Category::GetBooks() {
     return books;
 }
 
 //Order methods
 int Order::orderCount = 0;
 Order::Order() : totalAmount(0) {
-    if (orderCount >= MAX_ORDERS) {
-        throw MaxOrdersReachedException();
-    }
     ++orderCount;
     orderID = orderCount; 
 }
 
-Order::~Order() {
-    std::cout << "Order " << orderID << " destroyed." << std::endl;
-}
 
 void Order::AddBook(Book& book) {
     items.push_back(book);
@@ -122,6 +146,9 @@ void Order::DisplayOrder() const {
 int Order::GetOrderCount() { return orderCount; }
 int Order::GetOrderID() { return orderID; }
 
+double Order::GetTotalAmount() { return this->totalAmount; };
+
+
 //BookStore methods
 BookStore::BookStore(const std::string& name) : name(name) {}
 
@@ -140,13 +167,22 @@ Book BookStore::GetBookByID(int id) {
     throw BookNotFoundException();
 }
 
-Order BookStore::GetOrderByID(int id) {
+Order& BookStore::GetOrderByID(int id) {
     for (Order* order : orders) {
         if (order->GetOrderID() == id) {
             return *order;
         }
     }
     throw OrderNotFoundException();
+}
+
+int BookStore::GetOrderPosition(Order& order) {
+    for (int i = 0; i < orders.size(); i++) {
+        if (orders[i] == &order) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void BookStore::DisplayCategories() {
@@ -168,12 +204,7 @@ void BookStore::PlaceOrder() {
         }
         throw OutOfMemoryException();
     }
-    catch (const MaxOrdersReachedException& e) {
-        cout << "Error: " << e.what() << endl;
-        isMax = true;
-    }
 
-    if(!isMax) {
         bool hasBooks = false;
 
         while (true) {
@@ -207,15 +238,79 @@ void BookStore::PlaceOrder() {
                 break;
             }
         }
+}
+
+void BookStore::DeleteOrder() {
+    int orderID;
+    std::cout << "Enter the order number: " << std::endl;
+    orderID = GetIntNumber();
+    try {
+        Order& order = GetOrderByID(orderID);
+        int orderPosition = GetOrderPosition(order);
+        if (orderPosition != -1) {
+            orders.erase(orders.begin() + orderPosition);
+            cout << "You have successfully deleted order number: " 
+                << order.GetOrderID() << endl;
+        }
+        else throw OrderNotFoundException();
     }
+    catch (const OrderNotFoundException& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+}
+
+void BookStore::ChangeOrder() {
+    int orderID;
+    std::cout << "Enter the order number: " << std::endl;
+    orderID = GetIntNumber();
+    try {
+        Order& order = GetOrderByID(orderID);
+        int orderPosition = GetOrderPosition(order);
+        if (orderPosition != -1) {
+            orders.erase(orders.begin() + orderPosition);
+            PlaceOrder();
+            cout << "You have successfully changed order" << endl;
+        }
+        else throw OrderNotFoundException();
+    }
+    catch (const OrderNotFoundException& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+}
+
+bool CompareOrdersByPrice( Order* order1,  Order* order2) {
+    return order1->GetTotalAmount() < order2->GetTotalAmount();
+}
+
+bool CompareBooksByPrice(Book* book1, Book* book2) {
+    return book1->GetPrice() < book2->GetPrice();
+}
+
+
+void BookStore::SortOrdersByPrice() {
+    sort(orders.begin(), orders.end(), CompareOrdersByPrice);
+    cout << "Orders sorted by price successfully." << endl;
+}
+
+void BookStore::SortBooksByPrice() {
+    for (Category* category : categories) {
+        vector<Book*>& books = category->GetBooks();
+        sort(books.begin(), books.end(), CompareBooksByPrice);
+    }
+
+    cout << "Books sorted by price successfully." << endl;
 }
 
 
 
-
 void BookStore::ShowOrders() {
-    for (int i = 0; i < orders.size(); i++) {
-        orders[i]->DisplayOrder();
+    if (orders.size() != 0) {
+        for (int i = 0; i < orders.size(); i++) {
+            orders[i]->DisplayOrder();
+        }
+    }
+    else {
+        cout << "You have no orders yet" << endl;
     }
 }
 

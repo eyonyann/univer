@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SchoolOfficeWork", "SchoolO
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BookStore", "BookStore\BookStore.vcxproj", "{4D828547-BE54-4A22-BEF6-FD415A495A5C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BookStoreFileIOStreams", "BookStoreFileIOStreams\BookStoreFileIOStreams.vcxproj", "{E642D1CA-C30E-46B5-963A-C732ED73517B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{4D828547-BE54-4A22-BEF6-FD415A495A5C}.Release|x64.Build.0 = Release|x64
 		{4D828547-BE54-4A22-BEF6-FD415A495A5C}.Release|x86.ActiveCfg = Release|Win32
 		{4D828547-BE54-4A22-BEF6-FD415A495A5C}.Release|x86.Build.0 = Release|Win32
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Debug|x64.ActiveCfg = Debug|x64
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Debug|x64.Build.0 = Debug|x64
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Debug|x86.ActiveCfg = Debug|Win32
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Debug|x86.Build.0 = Debug|Win32
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Release|x64.ActiveCfg = Release|x64
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Release|x64.Build.0 = Release|x64
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Release|x86.ActiveCfg = Release|Win32
+		{E642D1CA-C30E-46B5-963A-C732ED73517B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

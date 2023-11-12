@@ -32,13 +32,16 @@ int main() {
 
 
         int choice = 0;
-        const int maxOrders = 10;
 
         while (true) {
-            cout << "\nMenu Options" << endl;
-            cout << "1 - Place an Order" << endl;
-            cout << "2 - Show Orders" << endl;
-            cout << "3 - Find an Order" << endl;
+            cout << "\nMenu options" << endl;
+            cout << "1 - Place an order" << endl;
+            cout << "2 - Show orders" << endl;
+            cout << "3 - Find an order" << endl;
+            cout << "4 - Delete an order" << endl;
+            cout << "5 - Change an order" << endl;
+            cout << "6 - Sort orders by price" << endl;
+            cout << "7 - Sort books by price" << endl;
             cout << "0 - Exit" << endl;
             cout << "Choose an action: ";
             choice = GetIntNumber();
@@ -54,6 +57,22 @@ int main() {
             }
             case 3: {
                 myBookstore.FindOrder();
+                break;
+            }
+            case 4: {
+                myBookstore.DeleteOrder();
+                break;
+            }
+            case 5: {
+                myBookstore.ChangeOrder();
+                break;
+            }
+            case 6: {
+                myBookstore.SortOrdersByPrice();
+                break;
+            }
+            case 7: {
+                myBookstore.SortBooksByPrice();
                 break;
             }
             case 0: {

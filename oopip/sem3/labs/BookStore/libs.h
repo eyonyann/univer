@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <limits>
-#define MAX_ORDERS 3
+#include <algorithm>
+
 
 using namespace std;

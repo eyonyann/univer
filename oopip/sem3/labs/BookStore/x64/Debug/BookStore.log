@@ -1,6 +1,6 @@
 ﻿  InputChecks.cpp
   classes.cpp
-D:\My files\univer\oopip\sem3\labs\BookStore\classes.cpp(165,34): warning C4101: e: неиспользованная локальная переменная
+D:\My files\univer\oopip\sem3\labs\BookStore\classes.cpp(201,34): warning C4101: e: неиспользованная локальная переменная
   main.cpp
   Создание кода...
   BookStore.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\BookStore.exe

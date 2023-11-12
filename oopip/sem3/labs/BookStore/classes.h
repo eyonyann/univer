@@ -78,7 +78,7 @@ public:
 
     void AddBook(Book* book);
     void DisplayBooks() const;
-    const std::vector<Book*>& GetBooks() const;
+    std::vector<Book*>& GetBooks();
 
 private:
     std::string name;
@@ -88,11 +88,11 @@ private:
 class Order {
 public:
     Order();
-    ~Order();
     void AddBook(Book& book);
     void DisplayOrder() const;
     int GetOrderCount();
     int GetOrderID();
+    double GetTotalAmount();
 
 private:
     static int orderCount;
@@ -104,13 +104,20 @@ private:
 class BookStore {
 public:
     BookStore(const std::string& name);
+
     void AddCategory(Category* category);
     Book GetBookByID(int id);
-    Order GetOrderByID(int id);
+    Order& GetOrderByID(int id);
+    int GetOrderPosition(Order& order);
+
     void DisplayCategories();
     void PlaceOrder();
     void ShowOrders();
     void FindOrder();
+    void DeleteOrder();
+    void ChangeOrder();
+    void SortOrdersByPrice();
+    void SortBooksByPrice();
 
 private:
     std::vector<Order*> orders;
