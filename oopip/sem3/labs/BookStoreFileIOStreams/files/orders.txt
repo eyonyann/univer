@@ -1,0 +1,5 @@
+
+Order 1 Contents:
+ID    | Title                          | Author                         | Price (BYN)
+1     | Война и мир                    | Лев Толстой                    | 85.50     
+Total Amount: 86 BYN
