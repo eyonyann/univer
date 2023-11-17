@@ -1,3 +1,7 @@
 ﻿  classes.cpp
-D:\My files\univer\oopip\sem3\labs\BookStoreFileIOStreams\classes.cpp(216,34): warning C4101: e: неиспользованная локальная переменная
+D:\My files\univer\oopip\sem3\labs\BookStoreFileIOStreams\classes.cpp(155,33): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+D:\My files\univer\oopip\sem3\labs\BookStoreFileIOStreams\classes.cpp(185,49): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+D:\My files\univer\oopip\sem3\labs\BookStoreFileIOStreams\classes.cpp(242,34): warning C4101: e: неиспользованная локальная переменная
+  main.cpp
+  Создание кода...
   BookStoreFileIOStreams.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\BookStoreFileIOStreams.exe

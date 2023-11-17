@@ -73,6 +73,30 @@ void Book::DisplayInfo() const {
     std::cout.unsetf(std::ios::fixed);
 }
 
+void Book::WriteBookToFile(ofstream& outfile) {
+    outfile.setf(std::ios::left);
+    outfile.setf(std::ios::fixed);
+    outfile.precision(2);
+
+    outfile << std::setw(5) << bookID << " | "
+        << std::setw(30) << title << " | "
+        << std::setw(30) << author << " | "
+        << std::setw(10) << price << std::endl;
+
+    if (outfile.eof()) {
+        std::cerr << "Error: End of file reached during output." << std::endl;
+    }
+    else if (outfile.fail()) {
+        std::cerr << "Error: Output operation failed." << std::endl;
+    }
+    else if (outfile.bad()) {
+        std::cerr << "Error: Fatal output error." << std::endl;
+    }
+
+    outfile.unsetf(std::ios::left);
+    outfile.unsetf(std::ios::fixed);
+}
+
 
 std::string Book::GetTitle() { return title; }
 std::string Book::GetAuthor() { return author; }
@@ -132,7 +156,7 @@ void Order::AddBook(Book& book) {
 }
 
 void Order::DisplayOrder() const {
-    std::cout << "Order " << orderID << " Contents:" << std::endl;
+    std::cout << "\n" << "Order " << orderID << " Contents:" << std::endl;
     std::cout << std::left << std::setw(5) << "ID" << " | "
         << std::left << std::setw(30) << "Title" << " | "
         << std::left << std::setw(30) << "Author" << " | "
@@ -143,10 +167,24 @@ void Order::DisplayOrder() const {
     std::cout << "Total Amount: " << totalAmount << " BYN" << std::endl;
 }
 
+
+void Order::WriteOrderToFile(std::ofstream& outfile) {
+        outfile << "\n" << "Order " << orderID << " Contents:" << std::endl;
+        outfile << std::left << std::setw(5) << "ID" << " | "
+            << std::left << std::setw(30) << "Title" << " | "
+            << std::left << std::setw(30) << "Author" << " | "
+            << std::left << std::setw(10) << "Price (BYN)" << std::endl;
+        for (Book book : items) {
+            book.WriteBookToFile(outfile);
+        }
+        outfile << "Total Amount: " << totalAmount << " BYN" << std::endl;
+}
+
 int Order::GetOrderCount() { return orderCount; }
 int Order::GetOrderID() { return orderID; }
+int Order::GetCountOfBooks() { return items.size(); }
 
-double Order::GetTotalAmount() { return this->totalAmount; };
+float Order::GetTotalAmount() { return this->totalAmount; };
 
 vector<Book> Order::GetOrderBooks() { return items; }
 
@@ -193,18 +231,6 @@ void BookStore::DisplayCategories() {
     }
 }
 
-void BookStore::PlaceOrderToFile(Order& newOrder) {
-    ofstream outfile(ORDERSFILENAME, ios::app);
-    vector<Book> items = newOrder.GetOrderBooks();
-    if (outfile.is_open()) {
-        outfile << newOrder.GetOrderID() << "\n";
-        for (Book book : items) {
-            outfile << book.GetBookID() << " ";
-        }
-        outfile << "\n";
-        outfile << newOrder.GetTotalAmount() << "\n\n";
-    }
-}
 
 void BookStore::PlaceOrder() {
     Order* newOrder = nullptr;
@@ -253,7 +279,11 @@ void BookStore::PlaceOrder() {
             break;
         }
     }
-    PlaceOrderToFile(*newOrder);
+    ofstream outfile(ORDERSFILENAME, ios::app);
+    if (outfile.is_open()) {
+        newOrder->WriteOrderToFile(outfile);
+        outfile.close();
+    }
 }
 
 void BookStore::DeleteOrder() {
@@ -265,10 +295,21 @@ void BookStore::DeleteOrder() {
         int orderPosition = GetOrderPosition(order);
         if (orderPosition != -1) {
             orders.erase(orders.begin() + orderPosition);
-            cout << "You have successfully deleted order number: "
-                << order.GetOrderID() << endl;
+
+            ofstream outfile(ORDERSFILENAME);
+            if (outfile.is_open()) {
+                for (Order* ord : orders) {
+                    ord->WriteOrderToFile(outfile);
+                }
+                outfile.close();
+            }
+
+            std::cout << "You have successfully deleted order number: "
+                << orderID << std::endl;
         }
-        else throw OrderNotFoundException();
+        else {
+            throw OrderNotFoundException();
+        }
     }
     catch (const OrderNotFoundException& e) {
         std::cerr << "Error: " << e.what() << std::endl;
@@ -284,6 +325,15 @@ void BookStore::ChangeOrder() {
         int orderPosition = GetOrderPosition(order);
         if (orderPosition != -1) {
             orders.erase(orders.begin() + orderPosition);
+
+            ofstream outfile(ORDERSFILENAME);
+            if (outfile.is_open()) {
+                for (Order* ord : orders) {
+                    ord->WriteOrderToFile(outfile);
+                }
+                outfile.close();
+            }
+
             PlaceOrder();
             cout << "You have successfully changed order" << endl;
         }
@@ -294,49 +344,55 @@ void BookStore::ChangeOrder() {
     }
 }
 
-bool CompareOrdersByPrice(Order* order1, Order* order2) {
-    return order1->GetTotalAmount() < order2->GetTotalAmount();
-}
-
-bool CompareBooksByPrice(Book* book1, Book* book2) {
-    return book1->GetPrice() < book2->GetPrice();
-}
-
-
-void BookStore::SortOrdersByPrice() {
-    sort(orders.begin(), orders.end(), CompareOrdersByPrice);
-    cout << "Orders sorted by price successfully." << endl;
-}
-
-void BookStore::SortBooksByPrice() {
-    for (Category* category : categories) {
-        vector<Book*>& books = category->GetBooks();
-        sort(books.begin(), books.end(), CompareBooksByPrice);
-    }
-
-    cout << "Books sorted by price successfully." << endl;
-}
-
-
-
 void BookStore::ShowOrders() {
-    if (orders.size() != 0) {
-        for (int i = 0; i < orders.size(); i++) {
-            orders[i]->DisplayOrder();
+    std::string fileData;
+    std::ifstream readfile(ORDERSFILENAME, std::ios::in);
+    if (readfile.is_open()) {
+        std::string line;
+        while (std::getline(readfile, line)) {
+            fileData += line + "\n";
         }
+        readfile.close();
+
+        std::cout << fileData << std::endl;
     }
-    else {
-        cout << "You have no orders yet" << endl;
+    if (fileData == "") {
+        std::cout << "You have no orders yet" << std::endl;
     }
 }
 
 void BookStore::FindOrder() {
+    std::ifstream readFile(ORDERSFILENAME, std::ios::in);
+    std::string line;
+    bool found = false;
+
     int orderID;
     std::cout << "Enter the order number: " << std::endl;
     orderID = GetIntNumber();
+    Order order = GetOrderByID(orderID);
+    std::string searchString = "Order " + std::to_string(orderID) + " Contents:";
+    std::string orderInfo;
+
     try {
-        Order order = GetOrderByID(orderID);
-        order.DisplayOrder();
+        while (getline(readFile, line)) {
+            if (line.find(searchString) != std::string::npos) {
+                found = true;
+                std::cout << "\nFound order with number " << orderID << ":\n";
+            }
+            if (found) {
+                for (int i = 0; i < order.GetCountOfBooks() + 2; i++) {
+                    if (getline(readFile, line)) {
+                        orderInfo += line + "\n";
+                    }
+                }
+                std::cout << orderInfo << std::endl;
+                break;
+            }
+        }
+
+        if (!found) {
+            throw OrderNotFoundException();
+        }
     }
     catch (const OrderNotFoundException& e) {
         std::cerr << "Error: " << e.what() << std::endl;

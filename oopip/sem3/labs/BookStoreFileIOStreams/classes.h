@@ -55,6 +55,7 @@ public:
     ~Book();
 
     void DisplayInfo() const;
+    void WriteBookToFile(std::ofstream& outfile);
     std::string GetTitle();
     std::string GetAuthor();
     double GetPrice();
@@ -90,16 +91,18 @@ public:
     Order();
     void AddBook(Book& book);
     void DisplayOrder() const;
+    void WriteOrderToFile(std::ofstream& outfile);
     int GetOrderCount();
     int GetOrderID();
-    double GetTotalAmount();
+    float GetTotalAmount();
+    int GetCountOfBooks();
     vector<Book> GetOrderBooks();
 
 private:
     static int orderCount;
     int orderID;
     std::vector<Book> items;
-    double totalAmount;
+    float totalAmount;
 };
 
 class BookStore {
@@ -113,13 +116,12 @@ public:
 
     void DisplayCategories();
     void PlaceOrder();
-    void PlaceOrderToFile(Order& newOrder);
     void ShowOrders();
     void FindOrder();
     void DeleteOrder();
     void ChangeOrder();
-    void SortOrdersByPrice();
-    void SortBooksByPrice();
+    //void SortOrdersByPrice();
+    //void SortBooksByPrice();
 
 private:
     std::vector<Order*> orders;

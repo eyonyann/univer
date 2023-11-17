@@ -1,4 +1,4 @@
-#include "libs.h"
+ï»¿#include "libs.h"
 #include "InputChecks.h"
 #include "classes.h"
 
@@ -6,25 +6,44 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    const wchar_t* directoryPath = L"files";
+
+    if (!CreateDirectory(directoryPath, NULL)) {
+        if (GetLastError() == ERROR_ALREADY_EXISTS) {
+            std::wcout << L"Directory 'files' already exists.\n";
+        }
+        else {
+            std::cerr << "Error creating directory 'files'.\n";
+        }
+    }
+    else {
+        std::wcout << L"Directory 'files' created successfully.\n";
+    }
+
+    ofstream outfile(ORDERSFILENAME);
+    if (outfile.is_open()) {
+        outfile.close();
+    }
+
     try {
         BookStore myBookstore("My Bookstore");
 
-        Category fiction("Õóäîæåñòâåííàÿ ëèòåðàòóðà");
-        fiction.AddBook(new Book("Âîéíà è ìèð", "Ëåâ Òîëñòîé", 85.50));
-        fiction.AddBook(new Book("Ïðåñòóïëåíèå è íàêàçàíèå", "Ôåäîð Äîñòîåâñêèé", 45.25));
-        fiction.AddBook(new Book("Ìàñòåð è Ìàðãàðèòà", "Ìèõàèë Áóëãàêîâ", 32.00));
-        fiction.AddBook(new Book("1984", "Äæîðäæ Îðóýëë", 20.50));
-        fiction.AddBook(new Book("Òðè òîâàðèùà", "Ýðèõ Ìàðèÿ Ðåìàðê", 38.75));
+        Category fiction("Ð¥ÑƒÐ´Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð°Ñ Ð»Ð¸Ñ‚ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð°");
+        fiction.AddBook(new Book("Ð’Ð¾Ð¹Ð½Ð° Ð¸ Ð¼Ð¸Ñ€", "Ð›ÐµÐ² Ð¢Ð¾Ð»ÑÑ‚Ð¾Ð¹", 85.50));
+        fiction.AddBook(new Book("ÐŸÑ€ÐµÑÑ‚ÑƒÐ¿Ð»ÐµÐ½Ð¸Ðµ Ð¸ Ð½Ð°ÐºÐ°Ð·Ð°Ð½Ð¸Ðµ", "Ð¤ÐµÐ´Ð¾Ñ€ Ð”Ð¾ÑÑ‚Ð¾ÐµÐ²ÑÐºÐ¸Ð¹", 45.25));
+        fiction.AddBook(new Book("ÐœÐ°ÑÑ‚ÐµÑ€ Ð¸ ÐœÐ°Ñ€Ð³Ð°Ñ€Ð¸Ñ‚Ð°", "ÐœÐ¸Ñ…Ð°Ð¸Ð» Ð‘ÑƒÐ»Ð³Ð°ÐºÐ¾Ð²", 32.00));
+        fiction.AddBook(new Book("1984", "Ð”Ð¶Ð¾Ñ€Ð´Ð¶ ÐžÑ€ÑƒÑÐ»Ð»", 20.50));
+        fiction.AddBook(new Book("Ð¢Ñ€Ð¸ Ñ‚Ð¾Ð²Ð°Ñ€Ð¸Ñ‰Ð°", "Ð­Ñ€Ð¸Ñ… ÐœÐ°Ñ€Ð¸Ñ Ð ÐµÐ¼Ð°Ñ€Ðº", 38.75));
 
-        Category nonFiction("Íàó÷íî-ïîïóëÿðíàÿ ëèòåðàòóðà");
-        nonFiction.AddBook(new Book("Êðàòêàÿ èñòîðèÿ âðåìåíè", "Ñòèâåí Õîêèíã", 28.75));
-        nonFiction.AddBook(new Book("×åëîâåê è åãî ñèìâîëû", "Êàðë Þíã", 95.00));
-        nonFiction.AddBook(new Book("Êîñìîñ: ×àñòíàÿ èñòîðèÿ", "Êàðë Ñàãàí", 42.30));
-        nonFiction.AddBook(new Book("Áèîëîãèÿ ÷åëîâåêà", "Äæîí Äæîíñîí", 55.90));
+        Category nonFiction("ÐÐ°ÑƒÑ‡Ð½Ð¾-Ð¿Ð¾Ð¿ÑƒÐ»ÑÑ€Ð½Ð°Ñ Ð»Ð¸Ñ‚ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð°");
+        nonFiction.AddBook(new Book("ÐšÑ€Ð°Ñ‚ÐºÐ°Ñ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸", "Ð¡Ñ‚Ð¸Ð²ÐµÐ½ Ð¥Ð¾ÐºÐ¸Ð½Ð³", 28.75));
+        nonFiction.AddBook(new Book("Ð§ÐµÐ»Ð¾Ð²ÐµÐº Ð¸ ÐµÐ³Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹", "ÐšÐ°Ñ€Ð» Ð®Ð½Ð³", 95.00));
+        nonFiction.AddBook(new Book("ÐšÐ¾ÑÐ¼Ð¾Ñ: Ð§Ð°ÑÑ‚Ð½Ð°Ñ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ", "ÐšÐ°Ñ€Ð» Ð¡Ð°Ð³Ð°Ð½", 42.30));
+        nonFiction.AddBook(new Book("Ð‘Ð¸Ð¾Ð»Ð¾Ð³Ð¸Ñ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ°", "Ð”Ð¶Ð¾Ð½ Ð”Ð¶Ð¾Ð½ÑÐ¾Ð½", 55.90));
 
-        Category biography("Áèîãðàôèè è ìåìóàðû");
-        biography.AddBook(new Book("Ñòèâ Äæîáñ: Áèîãðàôèÿ", "Óîëòåð Àéçåêñîí", 42.75));
-        biography.AddBook(new Book("Ìîé äåäóøêà", "Àðòóð Øîïåíãàóýð", 18.90));
+        Category biography("Ð‘Ð¸Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ð¸ Ð¸ Ð¼ÐµÐ¼ÑƒÐ°Ñ€Ñ‹");
+        biography.AddBook(new Book("Ð¡Ñ‚Ð¸Ð² Ð”Ð¶Ð¾Ð±Ñ: Ð‘Ð¸Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ñ", "Ð£Ð¾Ð»Ñ‚ÐµÑ€ ÐÐ¹Ð·ÐµÐºÑÐ¾Ð½", 42.75));
+        biography.AddBook(new Book("ÐœÐ¾Ð¹ Ð´ÐµÐ´ÑƒÑˆÐºÐ°", "ÐÑ€Ñ‚ÑƒÑ€ Ð¨Ð¾Ð¿ÐµÐ½Ð³Ð°ÑƒÑÑ€", 18.90));
 
         myBookstore.AddCategory(&fiction);
         myBookstore.AddCategory(&nonFiction);
@@ -40,8 +59,6 @@ int main() {
             cout << "3 - Find an order" << endl;
             cout << "4 - Delete an order" << endl;
             cout << "5 - Change an order" << endl;
-            cout << "6 - Sort orders by price" << endl;
-            cout << "7 - Sort books by price" << endl;
             cout << "0 - Exit" << endl;
             cout << "Choose an action: ";
             choice = GetIntNumber();
@@ -65,14 +82,6 @@ int main() {
             }
             case 5: {
                 myBookstore.ChangeOrder();
-                break;
-            }
-            case 6: {
-                myBookstore.SortOrdersByPrice();
-                break;
-            }
-            case 7: {
-                myBookstore.SortBooksByPrice();
                 break;
             }
             case 0: {
