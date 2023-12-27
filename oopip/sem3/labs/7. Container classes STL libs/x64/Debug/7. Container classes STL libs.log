@@ -1,2 +1,8 @@
 ﻿  main.cpp
+D:\My files\univer\oopip\sem3\labs\7. Container classes STL libs\main.cpp(733,44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\My files\univer\oopip\sem3\labs\7. Container classes STL libs\main.cpp(784,46): warning C4244: =: преобразование "_Ty1" в "float", возможна потеря данных
+          with
+          [
+              _Ty1=const int
+          ]
   7. Container classes STL libs.vcxproj -> D:\My files\univer\oopip\sem3\labs\x64\Debug\7. Container classes STL libs.exe

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BedsRoom">
+    <Position X="10.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BrandedKeyring" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAIBAAAAAAAAAAAAAAAAAABABAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BrandedKeyringSpec" Collapsed="true">
+    <Position X="1.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQABABAAAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BrandedPillow" Collapsed="true">
+    <Position X="11" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAACAAAAAAAABAAAAAAAAAACACAAAAAAAAAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BrandedPillowSpec" Collapsed="true">
+    <Position X="9" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAABAAACAAAAAQAAAAAAAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectibleToy" Collapsed="true">
+    <Position X="12.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIACAACAAAAABAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectibleToySpec" Collapsed="true">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAIAAAAAAAAAAABAAQAAAAAAAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConceptualRoom">
+    <Position X="13.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CouchesRoom">
+    <Position X="18" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmptyRoom">
+    <Position X="9" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Event">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Food">
+    <Position X="3.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAA=</HashCode>
+      <FileName>CinemaFood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotDog">
+    <Position X="2.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>CinemaFood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IceCream">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>CinemaFood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KidsRoom">
+    <Position X="16" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogoMug" Collapsed="true">
+    <Position X="14.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAABAAIAAAAAgAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogoMugSpec" Collapsed="true">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAIAAAAAgAAAAAAAQAAAAAAAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MerchandiseUnit" Collapsed="true">
+    <Position X="14.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAABAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MerchandiseUnitSpec" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoviePoster" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAACAAAAAAAABAAAAAAAAAAAAAAAIAgAAAAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoviePosterSpec" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAABAI=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Popcorn">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>CinemaFood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Soda">
+    <Position X="6.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>CinemaFood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIPRoom">
+    <Position X="14.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VRRoom">
+    <Position X="12.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ConceptualRooms">
+    <Position X="2.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAgAAAAAAEAAAggAAgAAAAAAAAA=</HashCode>
+      <FileName>ConceptualRooms.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MerchandiseUnits">
+    <Position X="4.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAgCAAAAAAAAAAEAAAAABAAAAAQAAAA=</HashCode>
+      <FileName>MerchandiseUnit.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
