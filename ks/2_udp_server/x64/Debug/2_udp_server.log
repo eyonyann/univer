@@ -1,0 +1,4 @@
+﻿  server.cpp
+D:\my files\univer\ks\2_udp_server\server.cpp(49,16): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\my files\univer\ks\2_udp_server\server.cpp(65,28): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  2_udp_server.vcxproj -> D:\my files\univer\ks\x64\Debug\2_udp_server.exe
